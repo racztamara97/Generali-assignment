@@ -26,7 +26,7 @@
             </form>
             <div th:if="${session.call} != null" class="col-sm float-right">
                 <form action="#" th:action="@{/}" th:object="${newCall}" method="get">
-                    <p th:text="${newCall.actualDate}">last call</p>
+                    <p th:text="${newCall}">last call</p>
                 </form>
             </div>
         </div>
