@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -40,9 +41,9 @@ public class Controller {
     
     @GetMapping("/call")
     public String call(Model model, HttpSession session){
-        Call newCall = callService.createNewCall();
-        model.addAttribute("newCall", newCall);
+        String newCall = callService.createNewCall();
         session.setAttribute("call", newCall);
+        model.addAttribute("newCall", newCall);
         return "index";
     }
 
