@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 //@ConfigurationProperties
@@ -22,13 +23,14 @@ public class CallService {
     @Autowired
     CallRepository callRepository;
 
-    public Call createNewCall(){
+    public String createNewCall(){
         ZonedDateTime zonedDateTime = ZonedDateTime.now();
         zonedDateTime = zonedDateTime.plusHours(1);
         Call newCall = new Call();
         newCall.setActualDate(zonedDateTime);
+        String formattedDate = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss a").format(zonedDateTime);
         callRepository.save(newCall);
-        return newCall;
+        return formattedDate;
     }
 
 }
