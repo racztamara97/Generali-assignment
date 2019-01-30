@@ -34,9 +34,15 @@ public class Controller {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index() {
+        return "index";
+    }
+    
+    @GetMapping("/call")
+    public String call(Model model, HttpSession session){
         Call newCall = callService.createNewCall();
         model.addAttribute("newCall", newCall);
+        session.setAttribute("call", newCall);
         return "index";
     }
 
