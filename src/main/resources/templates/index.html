@@ -21,10 +21,14 @@
 <div class="container">
     <div class="row list-group">
         <div class="item col-xs-12">
-            <form action="#" th:action="@{/}" th:object="${newCall}" method="get">
-                <button th:text="${newCall.actualDate}" class="btn btn-link">question title
-                </button>
+            <form action="#" th:action="@{/call}" method="get">
+                <button class="btn btn-secondary">New call</button>
             </form>
+            <div th:if="${session.call} != null" class="col-sm float-right">
+                <form action="#" th:action="@{/}" th:object="${newCall}" method="get">
+                    <p th:text="${newCall.actualDate}">last call</p>
+                </form>
+            </div>
         </div>
     </div>
 </div>
