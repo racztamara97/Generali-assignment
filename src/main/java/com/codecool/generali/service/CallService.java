@@ -26,9 +26,11 @@ public class CallService {
 
     private static final Logger logger = LogManager.getLogger(CallService.class);
 
+    int defaultTimezone = 1;
+
     public String createNewCall(){
         ZonedDateTime zonedDateTime = ZonedDateTime.now();
-        zonedDateTime = zonedDateTime.plusHours(1);
+        zonedDateTime = zonedDateTime.plusHours(defaultTimezone);
         Call newCall = new Call();
         newCall.setActualDate(zonedDateTime);
         String formattedDate = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss a").format(zonedDateTime);
