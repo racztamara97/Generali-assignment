@@ -26,9 +26,6 @@ public class Controller {
     @Autowired
     private CallService callService;
 
-    @Autowired
-    private CallRepository callRepository;
-
     @ModelAttribute("call")
     public Call createCall() {
         return new Call();
@@ -38,13 +35,19 @@ public class Controller {
     public String index() {
         return "index";
     }
-    
+
     @GetMapping("/call")
-    public String call(Model model, HttpSession session){
+    public String call(Model model, HttpSession session) {
         String newCall = callService.createNewCall();
         session.setAttribute("call", newCall);
         model.addAttribute("newCall", newCall);
         return "index";
+    }
+
+    @GetMapping("/previous")
+    public String prevCalls(Model model) {
+        model.addAttribute("calls", callService.prevCallsToString());
+        return "previousCalls";
     }
 
 
