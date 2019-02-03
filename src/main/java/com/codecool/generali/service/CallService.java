@@ -2,16 +2,17 @@ package com.codecool.generali.service;
 
 import com.codecool.generali.model.Call;
 import com.codecool.generali.repository.CallRepository;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 //@ConfigurationProperties
 @Service
@@ -23,6 +24,8 @@ public class CallService {
     @Autowired
     CallRepository callRepository;
 
+    private static final Logger logger = LogManager.getLogger(CallService.class);
+
     public String createNewCall(){
         ZonedDateTime zonedDateTime = ZonedDateTime.now();
         zonedDateTime = zonedDateTime.plusHours(1);
@@ -30,7 +33,18 @@ public class CallService {
         newCall.setActualDate(zonedDateTime);
         String formattedDate = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss a").format(zonedDateTime);
         callRepository.save(newCall);
+        logger.info(formattedDate);
         return formattedDate;
+    }
+
+    public List<String> prevCallsToString(){
+        List<Call> previous = callRepository.findAll();
+        List<String> prevsToString = new ArrayList<>();
+        for(int i=0; i<previous.size();i++) {
+            Call actual = previous.get(i);
+            prevsToString.add(DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss a").format(actual.getActualDate()));
+        }
+        return prevsToString;
     }
 
 }
