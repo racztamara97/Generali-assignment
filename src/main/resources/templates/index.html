@@ -24,6 +24,9 @@
             <form action="#" th:action="@{/call}" method="get">
                 <button class="btn btn-secondary">New call</button>
             </form>
+            <form action="#" th:action="@{/previous}" method="get">
+                <button class="btn btn-secondary">Previous calls</button>
+            </form>
             <div th:if="${session.call} != null" class="col-sm float-right">
                 <form action="#" th:action="@{/}" th:object="${newCall}" method="get">
                     <p th:text="${newCall}">last call</p>
