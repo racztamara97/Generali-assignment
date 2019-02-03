@@ -28,7 +28,8 @@ public class CallService {
 
     int defaultTimezone = 1;
 
-    public String createNewCall(){
+    //this method creates a new call and returns it
+    public String createNewCall() {
         ZonedDateTime zonedDateTime = ZonedDateTime.now();
         zonedDateTime = zonedDateTime.plusHours(defaultTimezone);
         Call newCall = new Call();
@@ -39,10 +40,11 @@ public class CallService {
         return formattedDate;
     }
 
-    public List<String> prevCallsToString(){
+    //this method converts the list of previous calls to a list of strings and returns it
+    public List<String> prevCallsToString() {
         List<Call> previous = callRepository.findAll();
         List<String> prevsToString = new ArrayList<>();
-        for(int i=0; i<previous.size();i++) {
+        for (int i = 0; i < previous.size(); i++) {
             Call actual = previous.get(i);
             prevsToString.add(DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss a").format(actual.getActualDate()));
         }
