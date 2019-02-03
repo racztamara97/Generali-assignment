@@ -1,23 +1,14 @@
 package com.codecool.generali.controller;
 
 import com.codecool.generali.model.Call;
-import com.codecool.generali.repository.CallRepository;
 import com.codecool.generali.service.CallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 
 @org.springframework.stereotype.Controller
 @Scope("session")
@@ -36,6 +27,7 @@ public class Controller {
         return "index";
     }
 
+    //when the "New call" button clicked, it creates a new call
     @GetMapping("/call")
     public String call(Model model, HttpSession session) {
         String newCall = callService.createNewCall();
@@ -44,6 +36,7 @@ public class Controller {
         return "index";
     }
 
+    //when the "Previous calls" button clicked, it shows all previous calls
     @GetMapping("/previous")
     public String prevCalls(Model model) {
         model.addAttribute("calls", callService.prevCallsToString());
