@@ -1,6 +1,7 @@
 package com.codecool.generali.controller;
 
 import com.codecool.generali.model.Call;
+import com.codecool.generali.repository.CallRepository;
 import com.codecool.generali.service.CallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -16,6 +17,9 @@ public class Controller {
 
     @Autowired
     private CallService callService;
+
+    @Autowired
+    private CallRepository callRepository;
 
     @ModelAttribute("call")
     public Call createCall() {
@@ -39,7 +43,7 @@ public class Controller {
     //when the "Previous calls" button clicked, it shows all previous calls
     @GetMapping("/previous")
     public String prevCalls(Model model) {
-        model.addAttribute("calls", callService.prevCallsToString());
+        model.addAttribute("calls", callService.prevCallsToString(callRepository.findAll()));
         return "previousCalls";
     }
 

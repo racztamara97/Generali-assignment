@@ -41,8 +41,7 @@ public class CallService {
     }
 
     //this method converts the list of previous calls to a list of strings and returns it
-    public List<String> prevCallsToString() {
-        List<Call> previous = callRepository.findAll();
+    public List<String> prevCallsToString(List<Call> previous) {
         List<String> prevsToString = new ArrayList<>();
         for (int i = 0; i < previous.size(); i++) {
             Call actual = previous.get(i);
