@@ -1,5 +1,6 @@
 package com.codecool.generali;
 
+import com.codecool.generali.model.Call;
 import com.codecool.generali.service.CallService;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,6 +45,12 @@ public class GeneraliApplicationTests {
     @Test
     public void testDateFormat() {
         assertTrue(dateValidator.isThisDateValid(callService.createNewCall(ZonedDateTime.now()), "dd/MM/yyyy - hh:mm:ss a"));
+    }
+
+    @Test
+    public void testActualDateIsNotNull() {
+        Call newCall = new Call(ZonedDateTime.now());
+        assertNotNull(newCall.getActualDate());
     }
 
 }
