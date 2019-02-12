@@ -29,8 +29,7 @@ public class CallService {
     int defaultTimezone = 1;
 
     //this method creates a new call and returns it
-    public String createNewCall() {
-        ZonedDateTime zonedDateTime = ZonedDateTime.now();
+    public String createNewCall(ZonedDateTime zonedDateTime) {
         zonedDateTime = zonedDateTime.plusHours(defaultTimezone);
         Call newCall = new Call();
         newCall.setActualDate(zonedDateTime);

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpSession;
+import java.time.ZonedDateTime;
 
 @org.springframework.stereotype.Controller
 @Scope("session")
@@ -34,7 +35,7 @@ public class Controller {
     //when the "New call" button clicked, it creates a new call
     @GetMapping("/call")
     public String call(Model model, HttpSession session) {
-        String newCall = callService.createNewCall();
+        String newCall = callService.createNewCall(ZonedDateTime.now());
         session.setAttribute("call", newCall);
         model.addAttribute("newCall", newCall);
         return "index";
