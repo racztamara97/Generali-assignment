@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CallRepository extends JpaRepository<Call, String> {
 
-    List<Call> findAll();
+    List<Call> findAllByOrderByIdDesc();
 }
