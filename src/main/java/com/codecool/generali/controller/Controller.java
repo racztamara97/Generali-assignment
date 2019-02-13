@@ -27,10 +27,10 @@ public class Controller {
         return new Call();
     }
 
-    //index shows all of the previous calls
+    //index shows all of the previous calls in Descending order
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("calls", callService.prevCallsToString(callRepository.findAll()));
+        model.addAttribute("calls", callService.prevCallsToString(callRepository.findAllByOrderByIdDesc()));
         return "index";
     }
 
