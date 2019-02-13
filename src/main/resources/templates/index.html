@@ -18,22 +18,30 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<div th:replace="header :: header">&nbsp;</div>
+
 <div class="container">
     <div class="row list-group">
         <div class="item col-xs-12">
-            <form action="#" th:action="@{/call}" method="get">
-                <button class="btn btn-secondary">New call</button>
-            </form>
-            <form action="#" th:action="@{/previous}" method="get">
-                <button class="btn btn-secondary">Previous calls</button>
-            </form>
-            <div th:if="${session.call} != null" class="col-sm float-right">
-                <form action="#" th:action="@{/}" th:object="${newCall}" method="get">
-                    <p th:text="${newCall}">last call</p>
-                </form>
-            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Previous calls</th>
+                </tr>
+                </thead>
+                <tbody>
+                <div class="thumbnail" th:each="call: ${calls}">
+                    <tr>
+                        <td th:text="${call}">previous calls</td>
+                    </tr>
+
+                </div>
+                </tbody>
+            </table>
+
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
