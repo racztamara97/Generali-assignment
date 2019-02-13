@@ -27,8 +27,10 @@ public class Controller {
         return new Call();
     }
 
+    //index shows all of the previous calls
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("calls", callService.prevCallsToString(callRepository.findAll()));
         return "index";
     }
 
@@ -38,15 +40,7 @@ public class Controller {
         String newCall = callService.createNewCall(ZonedDateTime.now());
         session.setAttribute("call", newCall);
         model.addAttribute("newCall", newCall);
-        return "index";
+        return "redirect:/";
     }
-
-    //when the "Previous calls" button clicked, it shows all previous calls
-    @GetMapping("/previous")
-    public String prevCalls(Model model) {
-        model.addAttribute("calls", callService.prevCallsToString(callRepository.findAll()));
-        return "previousCalls";
-    }
-
 
 }
